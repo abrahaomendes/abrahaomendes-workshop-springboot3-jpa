@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.educaweb.curso.entities.User;
 import com.educaweb.curso.repositories.UserRepository;
+import com.educaweb.curso.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -21,7 +22,7 @@ public class UserService {
 	}
 	public User findById(Long id) {
 		Optional<User> obj = userRepository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 		
 	}
 	
